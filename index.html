@@ -1,14 +1,293 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.0/dist/semantic.min.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+        crossorigin="anonymous"></script>
     <title>Travel Truant</title>
 </head>
+
 <body>
-    <div class="title">
-        <h1>Travel Website</h1>
+
+    <div class="wrapper">
+
+        <div class="ui basic modal">
+            <i class="close icon"></i>
+            <div class="header">
+                Salad Spot
+            </div>
+            <div class="image content">
+                <div class="ui large image">
+                    <img src="/assets/images/img_1.jpg">
+                </div>
+                <div class="description">
+                    <div class="ui header">We've got the best salads in town.</div>
+                    <p>Come on in and bring the family. We promise you will come out feeling more energized and better
+                        about yourself.</p>
+                    <p>Did you like our food? Please leave as a good review</p>
+                </div>
+            </div>
+            <div class="actions">
+                <div class="ui red deny button">
+                    No, I Need Some Steak and Potatoes
+                </div>
+                <div class="ui positive right labeled icon button">
+                    Yes, It Was Delicious
+                    <i class="checkmark icon"></i>
+                </div>
+            </div>
+        </div>
+
+        <div class="ui placeholder segment grey inverted">
+            <div class="ui huge icon input">
+                <input type="text" placeholder="New Search ...">
+                <i class="search icon"></i>
+            </div>
+            <br>
+            <div class="inline">
+                <div class="ui inverted button">Clear Results</div>
+                <div class="ui inverted button">Search</div>
+            </div>
+        </div>
+
+        <div class="ui container segment">
+            <div class="ui dividing huge header">
+                Restaurants Near You
+            </div>
+            <div class="ui centered three stackable special cards">
+                <div class="card">
+                    <div class="blurring dimmable image">
+                        <div class="ui dimmer">
+                            <div class="content">
+                                <div class="center">
+                                    <div class="ui inverted button food-menu">View Menu</div>
+                                </div>
+                            </div>
+                        </div>
+                        <img src="/assets/images/img_0.jpg">
+                    </div>
+                    <div class="content">
+                        <a class="header">Salad Spot</a>
+                        <div class="meta">
+                            <span class="date">Created in Sep 2014</span>
+                        </div>
+                    </div>
+                    <div class="extra content">
+                        <a>
+                            <i class="users icon"></i>
+                            2 Reviews
+                        </a>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="blurring dimmable image">
+                        <div class="ui inverted dimmer">
+                            <div class="content">
+                                <div class="center">
+                                    <div class="ui inverted button food-menu">View Menu</div>
+                                </div>
+                            </div>
+                        </div>
+                        <img src="assets/images/img_1.jpg">
+                    </div>
+                    <div class="content">
+                        <a class="header">Another Salad Spot</a>
+                        <div class="meta">
+                            <span class="date">Created in Aug 2014</span>
+                        </div>
+                    </div>
+                    <div class="extra">
+                        Rating:
+                        <div class="ui star rating" data-rating="4"></div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="blurring dimmable image">
+                        <div class="ui inverted dimmer">
+                            <div class="content">
+                                <div class="center">
+                                    <div class="ui inverted button food-menu">View Menu</div>
+                                </div>
+                            </div>
+                        </div>
+                        <img src="assets/images/img_2.jpg">
+                    </div>
+                    <div class="content">
+                        <a class="header">Another Salad Spot</a>
+                        <div class="meta">
+                            <span class="date">Created in Aug 2014</span>
+                        </div>
+                    </div>
+                    <div class="extra content">
+                        <a>
+                            <i class="users icon"></i>
+                            2 Reviews
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="ui centered three stackable special cards">
+                <div class="card">
+                    <div class="blurring dimmable image">
+                        <div class="ui dimmer">
+                            <div class="content">
+                                <div class="center">
+                                    <div class="ui inverted button food-menu">View Menu</div>
+                                </div>
+                            </div>
+                        </div>
+                        <img src="/assets/images/img_0.jpg">
+                    </div>
+                    <div class="content">
+                        <a class="header">Salad Spot</a>
+                        <div class="meta">
+                            <span class="date">Created in Sep 2014</span>
+                        </div>
+                    </div>
+                    <div class="extra content">
+                        <a>
+                            <i class="users icon"></i>
+                            2 Reviews
+                        </a>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="blurring dimmable image">
+                        <div class="ui inverted dimmer">
+                            <div class="content">
+                                <div class="center">
+                                    <div class="ui inverted button food-menu">View Menu</div>
+                                </div>
+                            </div>
+                        </div>
+                        <img src="assets/images/img_1.jpg">
+                    </div>
+                    <div class="content">
+                        <a class="header">Another Salad Spot</a>
+                        <div class="meta">
+                            <span class="date">Created in Aug 2014</span>
+                        </div>
+                    </div>
+                    <div class="extra">
+                        Rating:
+                        <div class="ui star rating" data-rating="4"></div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="blurring dimmable image">
+                        <div class="ui inverted dimmer">
+                            <div class="content">
+                                <div class="center">
+                                    <div class="ui inverted button food-menu">View Menu</div>
+                                </div>
+                            </div>
+                        </div>
+                        <img src="assets/images/img_2.jpg">
+                    </div>
+                    <div class="content">
+                        <a class="header">Another Salad Spot</a>
+                        <div class="meta">
+                            <span class="date">Created in Aug 2014</span>
+                        </div>
+                    </div>
+                    <div class="extra content">
+                        <a>
+                            <i class="users icon"></i>
+                            2 Reviews
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="ui centered three stackable special cards">
+                <div class="card">
+                    <div class="blurring dimmable image">
+                        <div class="ui dimmer">
+                            <div class="content">
+                                <div class="center">
+                                    <div class="ui inverted button food-menu">View Menu</div>
+                                </div>
+                            </div>
+                        </div>
+                        <img src="/assets/images/img_0.jpg">
+                    </div>
+                    <div class="content">
+                        <a class="header">Salad Spot</a>
+                        <div class="meta">
+                            <span class="date">Created in Sep 2014</span>
+                        </div>
+                    </div>
+                    <div class="extra content">
+                        <a>
+                            <i class="users icon"></i>
+                            2 Reviews
+                        </a>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="blurring dimmable image">
+                        <div class="ui inverted dimmer">
+                            <div class="content">
+                                <div class="center">
+                                    <div class="ui inverted button food-menu">View Menu</div>
+                                </div>
+                            </div>
+                        </div>
+                        <img src="assets/images/img_1.jpg">
+                    </div>
+                    <div class="content">
+                        <a class="header">Another Salad Spot</a>
+                        <div class="meta">
+                            <span class="date">Created in Aug 2014</span>
+                        </div>
+                    </div>
+                    <div class="extra">
+                        Rating:
+                        <div class="ui star rating" data-rating="4"></div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="blurring dimmable image">
+                        <div class="ui inverted dimmer">
+                            <div class="content">
+                                <div class="center">
+                                    <div class="ui inverted button food-menu">View Menu</div>
+                                </div>
+                            </div>
+                        </div>
+                        <img src="assets/images/img_2.jpg">
+                    </div>
+                    <div class="content">
+                        <a class="header">Another Salad Spot</a>
+                        <div class="meta">
+                            <span class="date">Created in Aug 2014</span>
+                        </div>
+                    </div>
+                    <div class="extra content">
+                        <a>
+                            <i class="users icon"></i>
+                            2 Reviews
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
+
+
+    </div>
+
+    <div class="footer">
+        <p>Copyright Truant Team</p>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.0/dist/semantic.min.js"></script>
+    <script src="assets/javascript/app.js"></script>
+
 </body>
+
 </html>
