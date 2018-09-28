@@ -35,25 +35,37 @@ let url = 'https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesse
 // }
 
 // // variables for sygic
-var landmark = "great wall";
-var queryURL = "https://api.sygictravelapi.com/1.0/en/places/list?query=" + landmark;
+var landmark = $("#landmark-search").val();
+var queryURL = "https://api.sygictravelapi.com/1.0/en/places/list?query=";
 // ajax notation for sygic 
-$.ajax({
-    url: queryURL,
-    method: "GET",
-    headers: {
-        "x-api-key": "elOVQ84rsF7fwxTyQ2uwM64xAfBGcbJf8rbCGmgw"
-    },
-    // sygic console log
-}).then(function (response) {
-    console.log(response);
- 
-    var data = response.data.places;
-    $.each(data, function (i, place) {
-        //   output lat and lng of location
-        console.log(place.location);
-        console.log(place.name_suffix);
+$("#search").on("click", function () {
+    event.preventDefault();
+    landmark = $("#landmark-search").val();
+    queryURL += landmark;
+    // console.log(JSON.stringify(landmark));
+    // if (landmark == String){
+    $.ajax({
+        url: queryURL,
+        method: "GET",
+        headers: {
+            "x-api-key": "elOVQ84rsF7fwxTyQ2uwM64xAfBGcbJf8rbCGmgw"
+        },
+        // sygic console log
+    }).then(function (response) {
+        console.log(response);
+        var data = response.data.places;
+        $.each(data, function (i, place) {
+            //   output lat and lng of location
+            var sygLat = (place.location.lat);
+            var sygLng = (place.location.lng);
+            var sygSuffix = (place.name_suffix);
+            console.log(place.location.lat);
+            console.log(place.location.lng);
+            console.log(place.name_suffix);
+            console.log(place.id);
+
+        });
+    }).catch((error) => {
+        console.log(error)
     });
- }).catch((error) => {
-    console.log(error)
- });
+});
