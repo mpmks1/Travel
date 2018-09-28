@@ -1,0 +1,15 @@
+body    {
+    display: flex;
+    flex-direction: column;
+    min-height: 100%;
+}
+
+.wrapper    {
+    flex: 1;
+}
+
+.footer {
+    text-align: center;
+    padding-top: 20px;
+    font-size: 1.2rem;
+}
