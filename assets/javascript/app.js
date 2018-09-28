@@ -9,7 +9,32 @@ $('.ui.inverted.button.food-menu').on('click', function () {
         .modal('show')
 })
 
-// variables for sygic
+// $('.ui.inverted.button').on('click', getAPI)
+
+let landmark_radius = 'Enter info here'
+
+let url = 'https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search?term=by-chloe&location=boston'
+
+// function getAPI() {
+
+//     $.ajax({
+//         url: url,
+//         method: 'GET',
+//         headers: {
+//             'Authorization': 'Bearer hSg20dAvgmubASCTaSXjfHUdfVTxmC61k-8SUhivUTY9x4i8woHhKWzpRYhq3O_8egDpQRjDsPfge5EB8S5BWJhXHk94ldm1cfFQ5pdDikzj2IRSbh02B_auPxerW3Yx'
+//         },
+//         dataType: 'json'
+//     })
+//     .then(function (response) {
+//         let yelp_data = response.businesses
+//         console.log(response.businesses)
+//         $.each(yelp_data, function (i, place) {
+//             console.log(place.name)
+//         })
+//     })
+// }
+
+// // variables for sygic
 var landmark = "great wall";
 var queryURL = "https://api.sygictravelapi.com/1.0/en/places/list?query=" + landmark;
 // ajax notation for sygic 
@@ -22,16 +47,13 @@ $.ajax({
     // sygic console log
 }).then(function (response) {
     console.log(response);
-
+ 
     var data = response.data.places;
     $.each(data, function (i, place) {
-        //   output lat and long of location 
+        //   output lat and lng of location
         console.log(place.location);
+        console.log(place.name_suffix);
     });
-}).catch((error) => {
+ }).catch((error) => {
     console.log(error)
-});
-
-
-
-
+ });
