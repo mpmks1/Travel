@@ -27,64 +27,68 @@ $(document).ready(function () {
                             "x-api-key": "elOVQ84rsF7fwxTyQ2uwM64xAfBGcbJf8rbCGmgw"
                         },
                     })
-                    .then(function (landmarks) {
+                    .then(function (landmarks) {                        
 
                         // Store places object in variable
-                        let places = landmarks.data.places
-                        
-                        let urlPlaces = "https://api.sygictravelapi.com/1.0/en/places/"
-                        console.log(places);
-
-                        
-                        $.ajax({
-                            url: places.id,
-                            headers: {
-                                "x-api-key": "elOVQ84rsF7fwxTyQ2uwM64xAfBGcbJf8rbCGmgw"
-                            }
-                        })
-                        .then(function (results) {
-                            // console.log(results)
-                        })
-
-                        
+                        let places = landmarks.data.places;
 
                         // Push elements to DOM
-                        $.each(places, function (index, place) {
+                        for (var i = 0; i < places.length; i++) {
+                        // $.each(places, function () {
+                            
+                            console.log(places[i].id);
+                            
+                            let urlPlaces = "https://api.sygictravelapi.com/1.0/en/places/" + places[i].id;
+                            console.log(urlPlaces);
 
-                            // Push to responsive div
-                            $("#cards").append(`
-                    <div class="card" lat="${place.location.lat}" lng="${place.location.lng}">
-                      <div class="blurring dimmable image">
-                        <div class="ui dimmer">
-                          <div class="content">
-                            <div class="center">
-                              <div class="ui inverted button" id="${place.id}">View Landmark</div>
-                            </div>
-                          </div>
-                        </div>
-                        <img src="${place.thumbnail_url}">
-                      </div>
-                      <div class="content">
-                        <a class="header" id="${place.id}" src="${place.url}" target="_blank">${place.name}</a>
-                        <div class="meta">
-                          <h5>${place.name_suffix}</h5>
-                          <span class="date">${place.perex}</span>
-                        </div>
-                      </div>
-                      <div class="extra content">
-                          <i class="users icon"></i>
-                          Category: ${place.level}
-                      </div>
-                    `)
-                        })
+                            $.ajax({
+                                url: urlPlaces,
+                                headers: {
+                                    "x-api-key": "elOVQ84rsF7fwxTyQ2uwM64xAfBGcbJf8rbCGmgw"
+                                }
+                            })
+                            .then(function (results) {
+                                console.log(results.data.place.main_media.media[0].url);
+                                console.log(results.data.place.id);
+                                
+                                // Push to responsive div
+                                $("#cards").append(`
+                                <div class="card" lat="${results.data.place.location.lat}" lng="${results.data.place.location.lng}">
+                                <div class="blurring dimmable image">
+                                    <div class="ui dimmer">
+                                    <div class="content">
+                                        <div class="center">
+                                        <div class="ui inverted button" id="${results.data.place.id}">View Landmark</div>
+                                        </div>
+                                    </div>
+                                    </div>
+                                    <img src="${results.data.place.main_media.media[0].url}">
+                                </div>
+                                <div class="content">
+                                    <a class="header" id="${results.data.place.id}" src="${results.data.place.url}" target="_blank">${results.data.place.name}</a>
+                                    <div class="meta">
+                                    <h5>${results.data.place.name_suffix}</h5>
+                                    <span class="date">${results.data.place.perex}</span>
+                                    </div>
+                                </div>
+                                <div class="extra content">
+                                    <i class="users icon"></i>
+                                    Category: ${results.data.place.level}
+                                </div>
+                                `)
+                            })
+
+
+                        // })
+                        }
 
                         // Blur images on hover
                         $(".special.cards .image").dimmer({
                             on: "hover"
                         });
 
-                        // Clear search input
-                        $("#landmark-search").val('')
+                        // // Clear search input
+                        // $("#landmark-search").val('')
                     })
                     .then(function (data) {
 
