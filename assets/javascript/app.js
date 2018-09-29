@@ -20,6 +20,24 @@ $(document).ready(function () {
         let landmark = $("#landmark-search").val().trim()
         console.log(`User search: ${landmark}`)
 
+
+        //======firebase==============
+
+        console.log(landmark + " this is the landmark that should be added to firebase")
+    
+        database.ref().push({
+            landmarkLocation: landmark
+      
+        })
+      
+        database.ref().on("value", function(snapshot) {
+            //console.log(snapshot.val() + " all the firebase objects");
+        }, function(errorObject) {
+            console.log("firebase error, failed to read: " + errorObject.code);
+        });
+
+        //=========firebase=============
+
         // Make request to Sygic
         $.ajax({
                 url: urlSygic + landmark,
@@ -29,12 +47,15 @@ $(document).ready(function () {
             })
             .then(function (landmarks) {
 
+
+
                 // Store places object in variable
                 let places = landmarks.data.places
-                console.log(places)
+
 
                 // Push elements to DOM
                 $.each(places, function (index, place) {
+                    
 
                     // Push to responsive div
                     $("#cards").append(`
@@ -43,7 +64,7 @@ $(document).ready(function () {
                         <div class="ui dimmer">
                           <div class="content">
                             <div class="center">
-                              <div class="ui inverted button" id="${place.id}">View Landmark</div>
+                              <div class="ui inverted button" id="${index}">View Landmark</div>
                             </div>
                           </div>
                         </div>
@@ -108,3 +129,23 @@ $(document).ready(function () {
             })
     }
 })
+
+//================================firebase===================================================
+var config = {
+    apiKey: "AIzaSyAa6e_lXOL1nONWCwftcJW0NmsdPs4uK3w",
+    authDomain: "travel-truant.firebaseapp.com",
+    databaseURL: "https://travel-truant.firebaseio.com/",
+    projectId: "travel-truant",
+    storageBucket: "",
+    messagingSenderId: "525665077026"
+  };
+  firebase.initializeApp(config);
+
+  var database = firebase.database();
+
+
+
+
+
+
+
