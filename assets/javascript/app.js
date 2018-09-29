@@ -1,5 +1,12 @@
 $(document).ready(function () {
 
+// object that contains lat, lng, and id of each individual dynamic landmark card
+    var landObj = {
+        ids: [],
+        lats: [],
+        lngs: [],
+    }
+
 
 
     // Sygic api url
@@ -61,6 +68,18 @@ $(document).ready(function () {
                           Category: ${place.level}
                       </div>
                     `)
+
+                    // included on click function that pushes sygic api call data into a global var
+                    $(".ui.inverted.button").on("click", push);
+      
+                    function push(){
+                        landObj.ids.push(place.id);
+                        landObj.lats.push(place.location.lat);
+                        landObj.lngs.push(place.location.lng);
+                        console.log("hello" + landObj.lats[i] + landObj.lngs[i] + landObj.ids[i]);
+                    
+                    }
+
                 })
 
                 // Blur images on hover
@@ -71,21 +90,10 @@ $(document).ready(function () {
                 // Clear search input
                 $("#landmark-search").val('')
             })
-    }
 
-    function sygicModal() {
-        console.log('hello')
 
-        // Display modal on button click
-        $(".ui.inverted.button").on("click", function () {
-            $(".ui.basic.modal")
-                .modal("show")
-        })
-    }
-
-    // Yelp search event listener
-    $("#search-yelp").on("click", yelpAPI)
-
+             // Yelp search event listener - correct version
+    $(".ui.inverted.button").on("click", yelpAPI)
     // Yelp api url
     let urlYelp = "https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search?="
 
@@ -101,10 +109,47 @@ $(document).ready(function () {
             })
             .then(function (response) {
                 let yelp_data = response.businesses
-                console.log(response.businesses)
+                console.log(response.businesses);
+                console.log("responsesss" + response);
                 $.each(yelp_data, function (i, place) {
                     console.log(place.name)
                 })
             })
+    }
+
+
+    // // Yelp search event listener - correct version
+    // $("${place.id}").on("click", yelpAPI)
+    // // Yelp api url
+    // let urlYelp = "https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search?="
+
+    // function yelpAPI() {
+
+    //     $.ajax({
+    //             url: urlYelp,
+    //             method: "GET",
+    //             headers: {
+    //                 "Authorization": "Bearer hSg20dAvgmubASCTaSXjfHUdfVTxmC61k-8SUhivUTY9x4i8woHhKWzpRYhq3O_8egDpQRjDsPfge5EB8S5BWJhXHk94ldm1cfFQ5pdDikzj2IRSbh02B_auPxerW3Yx"
+    //             },
+    //             dataType: "json"
+    //         })
+    //         .then(function (response) {
+    //             let yelp_data = response.businesses
+    //             console.log(response.businesses);
+    //             console.log("responsesss" + response);
+    //             $.each(yelp_data, function (i, place) {
+    //                 console.log(place.name)
+    //             })
+    //         })
+    }
+    
+    function sygicModal() {
+        console.log('hello')
+
+        // Display modal on button click
+        $(".ui.inverted.button").on("click", function () {
+            $(".ui.basic.modal")
+                .modal("show")
+        })
     }
 })
