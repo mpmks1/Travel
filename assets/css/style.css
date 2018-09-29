@@ -8,6 +8,18 @@ body    {
     flex: 1;
 }
 
+.ui.placeholder.segment {
+    margin-top: 0px;
+}
+
+.ui.container.segment   {
+    display: none;
+}
+
+.extra.content  {
+    text-transform: capitalize;
+}
+
 .footer {
     text-align: center;
     padding-top: 20px;
