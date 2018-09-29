@@ -2,6 +2,7 @@
 <html lang="en">
 
 <head>
+    <script src="https://www.gstatic.com/firebasejs/5.5.2/firebase.js"></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -14,35 +15,51 @@
 
 <body>
 
-    <button class="ui inverted button">Sign in</button>
-
-    <div class="ui four column grid" id="container">
-
-        <div class="row">
-            <img id="logo" src="assets/images/Truant-logo.png" alt="logo"/>
+    <!DOCTYPE html>
+    <html lang="en">
+    
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.0/dist/semantic.min.css">
+        <link rel="stylesheet" href="assets/css/style2.css">
+        <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+            crossorigin="anonymous"></script>
+        <title>Travel Truant</title>
+    </head>
+    
+    <body>
+    
+        <button class="ui inverted button">Sign in</button>
+    
+        <div class="ui four column grid" id="container">
+    
+            <div class="row">
+                <a href="./index.html"><img id="logo" src="assets/images/Truant-logo.png" alt="logo"/></a>
+            </div>
+    
+            <div class="intro">
+                <p id="quote">"Travel makes one modest. You see what a tiny place you occupy in the world.” <br>- Gustav Flaubert</p>
+                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's
+                    standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a
+                    type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting,
+                    remaining essentially unchanged. </p>
+            </div>
+    
+            <div class="row" id="searchBtn">
+                <div class="ui large icon input centered">
+                    <input type="text" placeholder="Search a landmark..."  id="landmark-search">
+                    <a href="./search-page.html" id="indexSearch"><i class="circular search link icon"></i></a>
+                </div> 
+            </div>
+    
         </div>
-
-        <div class="intro">
-            <p id="quote">"Travel makes one modest. You see what a tiny place you occupy in the world.” <br>- Gustav Flaubert</p>
-            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's
-                standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a
-                type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting,
-                remaining essentially unchanged. </p>
-        </div>
-
-        <div class="row" id="searchBtn">
-            <div class="ui large icon input centered">
-                <input type="text" placeholder="Search a landmark..."  id="landmark-search">
-                <i class="circular search link icon" id="search"></i>
-            </div> 
-        </div>
-
-    </div>
-
-
-    <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.0/dist/semantic.min.js"></script>
-    <script src="assets/javascript/app.js"></script>
-
-</body>
-
-</html>
+    
+    
+        <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.0/dist/semantic.min.js"></script>
+        <script src="assets/javascript/app.js"></script>
+    
+    </body>
+    
+    </html>

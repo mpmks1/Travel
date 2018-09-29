@@ -1,7 +1,6 @@
 /* #bg-image {
     background-image: url("../images/bg3.jpg");
     height: 100%;
-
     background-size: auto;
     background-repeat: no-repeat;
     filter: blur(8px);
@@ -13,7 +12,7 @@
 body {
     background-color: darkgray;
 
-    background-image: url("../images/bg4.jpg");
+    background-image: url("../images/bg1.jpg");
     height: 100%;
 
     background-size: cover;
@@ -53,4 +52,10 @@ body {
 #quote {
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     font-size: 20px;
+}
+
+#indexSearch {
+    position: absolute;
+    top: .35em;
+    right: .5em;
 }
