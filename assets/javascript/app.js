@@ -1,5 +1,8 @@
 $(document).ready(function () {
 
+    //serach from index page
+    var landmark ='';
+
 // object that contains lat, lng, and id of each individual dynamic landmark card
     var landObj = {
         ids: [],
@@ -7,11 +10,23 @@ $(document).ready(function () {
         lngs: [],
     }
 
+
     // Sygic api url
     let urlSygic = "https://api.sygictravelapi.com/1.0/en/places/list?query=";
 
+    // add event listender to indexSearch button, store it into local storage
+    $("#searchBtn").on("click", "#indexSearch", function() {
+        landmark = $("#landmark-search").val().trim();
+        localStorage.setItem("landmarkSearch", landmark);
+        console.log(localStorage.getItem("landmarkSearch"));
+        $("#landmark-search").val((localStorage.getItem("landmarkSearch")));
+        console.log(`User search: ${landmark}`)
+    })
+
+    $("#landmark-search").val((localStorage.getItem("landmarkSearch")));
+    
     // Add event listener to search button
-    $("#search").on("click", sygicAPI)
+    $(".field").on("click", "#search", sygicAPI);
     $("#cards .card .blurring.dimmable.image .ui.dimmer.transition.hidden .content .center").on("click", ".ui.inverted.button", sygicModal)
 
     function sygicAPI() {
@@ -22,7 +37,10 @@ $(document).ready(function () {
         $(".ui.container.segment").show()
 
         // Value of search input
-        let landmark = $("#landmark-search").val().trim()
+        landmark = $("#landmark-search").val().trim();
+        localStorage.setItem("landmarkSearch", landmark);
+        console.log(localStorage.getItem("landmarkSearch"));
+        $("#landmark-search").val((localStorage.getItem("landmarkSearch")));
         console.log(`User search: ${landmark}`)
 
         // Make request to Sygic
@@ -94,7 +112,7 @@ $(document).ready(function () {
                 });
 
                 // Clear search input
-                $("#landmark-search").val('')
+                // $("#landmark-search").val('')
             })
 
 
