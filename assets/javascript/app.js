@@ -1,12 +1,14 @@
 $(document).ready(function () {
 
-
+    //serach from index page
+    var landmark ='';
 
     // Sygic api url
     let urlSygic = "https://api.sygictravelapi.com/1.0/en/places/list?query=";
 
     // Add event listener to search button
-    $("#search").on("click", sygicAPI)
+
+    $(".field").on("click", "#search", sygicAPI);
     $("#cards .card .blurring.dimmable.image .ui.dimmer.transition.hidden .content .center").on("click", ".ui.inverted.button", sygicModal)
 
     function sygicAPI() {
@@ -17,7 +19,10 @@ $(document).ready(function () {
         $(".ui.container.segment").show()
 
         // Value of search input
-        let landmark = $("#landmark-search").val().trim()
+        landmark = $("#landmark-search").val().trim();
+        localStorage.setItem("landmarkSearch", landmark);
+        console.log(localStorage.getItem("landmarkSearch"));
+        $("#landmark-search").val((localStorage.getItem("landmarkSearch")));
         console.log(`User search: ${landmark}`)
 
         // Make request to Sygic
