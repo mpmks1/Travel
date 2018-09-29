@@ -39,6 +39,8 @@ var landmark = $("#landmark-search").val();
 var queryURL = "https://api.sygictravelapi.com/1.0/en/places/list?query=";
 // ajax notation for sygic 
 $("#search").on("click", function () {
+    console.log("GOT ITTTT!!!");
+    
     event.preventDefault();
     landmark = $("#landmark-search").val();
     queryURL += landmark;
