@@ -50,6 +50,15 @@ $(document).ready(function () {
                             .then(function (results) {
                                 console.log(results.data.place.main_media.media[0].url);
                                 console.log(results.data.place.id);
+                                console.log(results.data.place.perex);
+
+                                var perex = results.data.place.perex;
+                                if(perex !== null) {
+                                    perex = results.data.place.perex;
+                                }
+                                else {
+                                    perex = " ";
+                                }
                                 
                                 // Push to responsive div
                                 $("#cards").append(`
@@ -68,7 +77,7 @@ $(document).ready(function () {
                                     <a class="header" id="${results.data.place.id}" src="${results.data.place.url}" target="_blank">${results.data.place.name}</a>
                                     <div class="meta">
                                     <h5>${results.data.place.name_suffix}</h5>
-                                    <span class="date">${results.data.place.perex}</span>
+                                    <span class="date">${perex}</span>
                                     </div>
                                 </div>
                                 <div class="extra content">
