@@ -2,42 +2,57 @@ $(document).ready(function () {
 
 
 
-    // Sygic api url
-    let urlSygic = "https://api.sygictravelapi.com/1.0/en/places/list?query=";
+            // Sygic api url
+            let urlSygic = "https://api.sygictravelapi.com/1.0/en/places/list?query=";
 
-    // Add event listener to search button
-    $("#search").on("click", sygicAPI)
-    $("#cards .card .blurring.dimmable.image .ui.dimmer.transition.hidden .content .center").on("click", ".ui.inverted.button", sygicModal)
+            // Add event listener to search button
+            $("#search").on("click", sygicAPI)
+            $("#cards .card .blurring.dimmable.image .ui.dimmer.transition.hidden .content .center").on("click", ".ui.inverted.button", sygicModal)
 
-    function sygicAPI() {
+            function sygicAPI() {
 
-        // Clear card content
-        $("#cards").empty()
+                // Clear card content
+                $("#cards").empty()
 
-        $(".ui.container.segment").show()
+                $(".ui.container.segment").show()
 
-        // Value of search input
-        let landmark = $("#landmark-search").val().trim()
-        console.log(`User search: ${landmark}`)
+                // Value of search input
+                let landmark = $("#landmark-search").val().trim()
+                console.log(`User search: ${landmark}`)
 
-        // Make request to Sygic
-        $.ajax({
-                url: urlSygic + landmark,
-                headers: {
-                    "x-api-key": "elOVQ84rsF7fwxTyQ2uwM64xAfBGcbJf8rbCGmgw"
-                },
-            })
-            .then(function (landmarks) {
+                // Make request to Sygic
+                $.ajax({
+                        url: urlSygic + landmark,
+                        headers: {
+                            "x-api-key": "elOVQ84rsF7fwxTyQ2uwM64xAfBGcbJf8rbCGmgw"
+                        },
+                    })
+                    .then(function (landmarks) {
 
-                // Store places object in variable
-                let places = landmarks.data.places
-                console.log(places)
+                        // Store places object in variable
+                        let places = landmarks.data.places
+                        
+                        let urlPlaces = "https://api.sygictravelapi.com/1.0/en/places/"
+                        console.log(places);
 
-                // Push elements to DOM
-                $.each(places, function (index, place) {
+                        
+                        $.ajax({
+                            url: places.id,
+                            headers: {
+                                "x-api-key": "elOVQ84rsF7fwxTyQ2uwM64xAfBGcbJf8rbCGmgw"
+                            }
+                        })
+                        .then(function (results) {
+                            // console.log(results)
+                        })
 
-                    // Push to responsive div
-                    $("#cards").append(`
+                        
+
+                        // Push elements to DOM
+                        $.each(places, function (index, place) {
+
+                            // Push to responsive div
+                            $("#cards").append(`
                     <div class="card" lat="${place.location.lat}" lng="${place.location.lng}">
                       <div class="blurring dimmable image">
                         <div class="ui dimmer">
@@ -61,50 +76,60 @@ $(document).ready(function () {
                           Category: ${place.level}
                       </div>
                     `)
-                })
+                        })
 
-                // Blur images on hover
-                $(".special.cards .image").dimmer({
-                    on: "hover"
-                });
+                        // Blur images on hover
+                        $(".special.cards .image").dimmer({
+                            on: "hover"
+                        });
 
-                // Clear search input
-                $("#landmark-search").val('')
+                        // Clear search input
+                        $("#landmark-search").val('')
+                    })
+                    .then(function (data) {
+
+                            // Yelp search event listener
+                            $("#search-yelp").on("click", yelpAPI)
+
+                            // Yelp api url
+                            let urlYelp = "https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search?="
+                            
+                        })
+                    }
+
+                // Yelp search event listener
+                $("#search-yelp").on("click", yelpAPI)
+
+                // Yelp api url
+                let urlYelp = "https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search?="
+
+                function yelpAPI() {
+
+                    $.ajax({
+                            url: urlYelp,
+                            method: "GET",
+                            headers: {
+                                "Authorization": "Bearer hSg20dAvgmubASCTaSXjfHUdfVTxmC61k-8SUhivUTY9x4i8woHhKWzpRYhq3O_8egDpQRjDsPfge5EB8S5BWJhXHk94ldm1cfFQ5pdDikzj2IRSbh02B_auPxerW3Yx"
+                            },
+                            dataType: "json"
+                        })
+                        .then(function (response) {
+                            let yelp_data = response.businesses
+                            console.log(response.businesses)
+                            $.each(yelp_data, function (i, place) {
+                                console.log(place.name)
+                            })
+                        })
+                }
             })
-    }
 
-    function sygicModal() {
-        console.log('hello')
 
-        // Display modal on button click
-        $(".ui.inverted.button").on("click", function () {
-            $(".ui.basic.modal")
-                .modal("show")
-        })
-    }
+        function sygicModal() {
+            console.log('hello')
 
-    // Yelp search event listener
-    $("#search-yelp").on("click", yelpAPI)
-
-    // Yelp api url
-    let urlYelp = "https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search?="
-
-    function yelpAPI() {
-
-        $.ajax({
-                url: urlYelp,
-                method: "GET",
-                headers: {
-                    "Authorization": "Bearer hSg20dAvgmubASCTaSXjfHUdfVTxmC61k-8SUhivUTY9x4i8woHhKWzpRYhq3O_8egDpQRjDsPfge5EB8S5BWJhXHk94ldm1cfFQ5pdDikzj2IRSbh02B_auPxerW3Yx"
-                },
-                dataType: "json"
+            // Display modal on button click
+            $(".ui.inverted.button").on("click", function () {
+                $(".ui.basic.modal")
+                    .modal("show")
             })
-            .then(function (response) {
-                let yelp_data = response.businesses
-                console.log(response.businesses)
-                $.each(yelp_data, function (i, place) {
-                    console.log(place.name)
-                })
-            })
-    }
-})
+        }
