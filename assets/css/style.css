@@ -12,6 +12,10 @@ body    {
     margin-top: 0px;
 }
 
+.ui.container.segment   {
+    display: none;
+}
+
 .extra.content  {
     text-transform: capitalize;
 }

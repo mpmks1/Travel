@@ -14,6 +14,8 @@ $(document).ready(function () {
         // Clear card content
         $("#cards").empty()
 
+        $(".ui.container.segment").show()
+
         // Value of search input
         let landmark = $("#landmark-search").val().trim()
         console.log(`User search: ${landmark}`)
@@ -79,7 +81,6 @@ $(document).ready(function () {
             $(".ui.basic.modal")
                 .modal("show")
         })
-
     }
 
     // Yelp search event listener
