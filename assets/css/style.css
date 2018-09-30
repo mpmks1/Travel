@@ -9,11 +9,16 @@ body    {
 }
 
 .ui.placeholder.segment {
+    background-image: url('../images/bg1.jpg');
     margin-top: 0px;
 }
 
 .ui.container.segment   {
     display: none;
+}
+
+.ui.header, #accordion-title {
+    color: white;
 }
 
 .extra.content  {
