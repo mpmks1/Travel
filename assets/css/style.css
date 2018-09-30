@@ -17,6 +17,10 @@ body    {
     display: none;
 }
 
+#header-title   {
+    color: black;
+}
+
 .ui.header, #accordion-title {
     color: white;
 }
