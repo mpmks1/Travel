@@ -10,13 +10,36 @@ $(document).ready(function () {
 
     // Add event listener to search button
     $("#search").on("click", sygicAPI)
+    // $("#search").on("click", zomatoAPI)
     $("#index-search").on("click", sygicAPI)
 
-    // Sygic api url
-    let urlSygic = "https://api.sygictravelapi.com/1.0/en/places/list?query=";
+    // Expand accordion
+    $(document).on("click", "#accordion-title", function () {
+        $(".ui.accordion").accordion()
+    })
+
+    // Landmark click event and call api
+    $(document).on("click", ".ui.inverted.button", function (index) {
+
+        // Store lat & lng variables
+        let lat = $(this).attr("lat")
+        let lng = $(this).attr("lng")
+
+        // Call yelp api function and pass lat & lng
+        yelpAPI(lat, lng);
+
+        // Call zomato api function and pass lat & lng
+        // zomatoAPI(lat, lng);
+
+        // Display modal on button click
+        $(".ui.modal").modal("show")
+    });
 
     // Call sygic api
     function sygicAPI() {
+
+        // Sygic api url
+        let urlSygic = "https://api.sygictravelapi.com/1.0/en/places/list?query=";
 
         // Clear card content
         $("#cards").empty();
@@ -42,6 +65,7 @@ $(document).ready(function () {
 
                 // Push elements to DOM
                 for (var i = 0; i < places.length; i++) {
+
                     urlPlaces = "https://api.sygictravelapi.com/1.0/en/places/" + places[i].id;
 
                     // console.log('url places: ' + urlPlaces)
@@ -58,14 +82,15 @@ $(document).ready(function () {
                             // console.log(results.data.place.perex);
 
                             var perex = results.data.place.perex;
-                            if (perex !== null) {
-                                perex = results.data.place.perex;
-                            } else {
-                                perex = " ";
-                            }
+                            var img_url = results.data.place.main_media.media[0].url
 
-                            // Push to responsive div
-                            $("#cards").append(`
+                            if (perex !== null || img_url !== null) {
+
+                                console.log(perex)
+                                console.log(JSON.stringify(img_url))
+
+                                // Push to responsive div
+                                $("#cards").append(`
                             <div class="card">
                                 <div class="blurring dimmable image">
                                     <div class="ui dimmer">
@@ -91,8 +116,7 @@ $(document).ready(function () {
                             </div>
                             `)
 
-                            $(".ui.basic.modal").append(`
-
+                                $(".ui.modal").html(`
                             <i class="close icon"></i>
                             <div class="header">
                               ${results.data.place.name}
@@ -112,18 +136,15 @@ $(document).ready(function () {
                                     <i class="dropdown icon"></i>
                                     View Restaurants in Area
                                     </div>
-                                    <div class="content" id="accordion-content">
-                                    <p class="transition hidden">A dog is a type of domesticated animal. Known for its loyalty and faithfulness, it can be found as a welcome guest in many households across the world.</p>
+                                    <div class="content">
+                                    <div class="ui items" id="accordion-content">
+                                    </div>
                                     </div>
                                 </div>
                             </div>
                             </div>
                                 `)
-
-                            // Expand accordion
-                            $("#accordion-title").on("click", function () {
-                                $(".ui.accordion").accordion()
-                            })
+                            }
 
                             // Blur images on hover
                             $(".special.cards .image").dimmer({
@@ -134,65 +155,113 @@ $(document).ready(function () {
                             $("#landmark-search").val('')
                         })
                 }
-
-                // Landmark click event and call api
-                $(document).on("click", ".ui.inverted.button", function (index) {
-
-                    // Store lat & lng variables
-                    let lat = $(this).attr("lat")
-                    let lng = $(this).attr("lng")
-
-                    // Call yelp api function and pass lat & lng
-                    yelpAPI(lat, lng);
-
-                    // Display modal on button click
-                    $(".ui.basic.modal").modal("show")
-                });
             })
+    }
 
-        // Yelp search event listener - correct version
-        function yelpAPI(lat, lng) {
+    // Yelp search event listener - correct version
+    function yelpAPI(lat, lng) {
 
-            // Yelp API url
-            var urlYelp = "https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search?=" + "&latitude=" + lat + "&longitude=" + lng + "&categories=restaurants&limit=5"
+        // Yelp API url
+        var urlYelp = "https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search?=" + "&latitude=" + lat + "&longitude=" + lng + "&categories=restaurants&limit=5"
 
-            fetch(urlYelp, {
-                    headers: {
-                        "Authorization": "Bearer hSg20dAvgmubASCTaSXjfHUdfVTxmC61k-8SUhivUTY9x4i8woHhKWzpRYhq3O_8egDpQRjDsPfge5EB8S5BWJhXHk94ldm1cfFQ5pdDikzj2IRSbh02B_auPxerW3Yx"
-                    }
-                })
-                .then((res) => res.json())
-                .then((data) => {
-                    let places = data.businesses
+        fetch(urlYelp, {
+                headers: {
+                    "Authorization": "Bearer hSg20dAvgmubASCTaSXjfHUdfVTxmC61k-8SUhivUTY9x4i8woHhKWzpRYhq3O_8egDpQRjDsPfge5EB8S5BWJhXHk94ldm1cfFQ5pdDikzj2IRSbh02B_auPxerW3Yx"
+                }
+            })
+            .then((res) => res.json())
+            .then((data) => {
+                let places = data.businesses
+                // console.log("*****Yelp Results Below*****")
+                // console.log(places)
 
-                    console.log(places)
+                $(document).on("click", "#accordion-title", function (e) {
 
-                    $("ui.positive.right.labeled.icon.button").on("click", function (e) {
-                        $.each(places, function (i, place) {
+                    // Clear previous elements
+                    $("#accordion-content").empty()
 
-                            // Push elements to modal
-                            $("#accordion-content").append(`
-                                    <div class="item">
-                                    <div class="image">
-                                    <img src="${place.image_url}">
-                                    </div>
-                                    <div class="content">
-                                    <a class="header">Header</a>
-                                    <div class="meta">
-                                        <span>Description</span>
-                                    </div>
-                                    <div class="description">
-                                        <p></p>
-                                    </div>
-                                    <div class="extra">
-                                        Additional Details
-                                    </div>
-                                    </div>
-                                    </div>
-                                `)
-                        })
+                    $.each(places, function (i, place) {
+
+                        // Push elements to modal
+                        $("#accordion-content").append(`
+                            <div class="item">
+                            <div class="image">
+                            <img class="ui medium image" src="${this.image_url}">
+                            </div>
+                            <div class="content">
+                            <a class="header" href="${this.url}" target="_blank">${this.name}</a>
+                            <div class="meta">
+                                <span>Category: ${this.categories[0].title}</span>
+                                <span>Open: ${this.is_closed}</span>
+                                <span>Price: ${this.price}</span>
+                                <span>Rating: ${this.rating}</span>
+                                <span>Distance: ${this.distance}</span>
+                            </div>
+                            <div class="description">
+                                <p>${this.location.display_address}</p>
+                            </div>
+                            <div class="extra">
+                                Additional Details
+                            </div>
+                            </div>
+                            </div>
+                        `)
                     })
                 })
-        }
+            })
+    }
+
+    // Call zomato api
+    function zomatoAPI(lat, lng) {
+        // Zomato url
+        let urlZomato = 'https://developers.zomato.com/api/v2.1/geocode?lat=' + lat + '&lon=' + lng
+        console.log(urlZomato)
+
+        $.ajax({
+                url: urlZomato,
+                headers: {
+                    "X-Zomato-API-Key": '9dfccaf245eac8f41bdcf42d94118ce4'
+                }
+            })
+            .then(function (response) {
+                // console.log(response)
+
+                let places = response.nearby_restaurants
+
+                // console.log(places)
+
+                $(document).on("click", ".dropdown.icon", function (e) {
+
+                    $("#accordion-content").empty()
+
+                    $.each(places, function (i, place) {
+                        console.log(place.restaurant)
+                        // Push elements to modal
+                        $("#accordion-content").append(`
+                            <div class="item">
+                            <div class="image">
+                            <img class="ui medium image" src="${place.restaurant.thumb}">
+                            </div>
+                            <div class="content">
+                            <a class="header" href="${place.restaurant.url}" target="_blank">${place.restaurant.name}</a>
+                            <div class="meta">
+                                <span>Category: ${place.restaurant.cuisines}</span>
+                                <span>Open: ${place.restaurant.is_closed}</span>
+                                <span>Price: ${place.restaurant.price_range}</span>
+                                <span>Rating: ${place.restaurant.user_rating.aggregate_rating}</span>
+                                <span>Distance: ${place.restaurant.user_rating.rating_text}</span>
+                            </div>
+                            <div class="description">
+                                <p>${place.restaurant.location.address}</p>
+                            </div>
+                            <div class="extra">
+                                Additional Details
+                            </div>
+                            </div>
+                            </div>
+                        `)
+                    })
+                })
+            })
     }
 })

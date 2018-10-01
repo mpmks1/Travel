@@ -21,7 +21,11 @@ body    {
     color: black;
 }
 
-.ui.header, #accordion-title {
+.ui.header, #accordion-title,  {
+    color: white;
+}
+
+div#accordion-content > *  {
     color: white;
 }
 
