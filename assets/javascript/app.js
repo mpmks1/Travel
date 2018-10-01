@@ -1,12 +1,5 @@
 $(document).ready(function () {
 
-    // object that contains lat, lng, and id of each individual dynamic landmark card
-    var landObj = {
-        ids: [],
-        lats: [],
-        lngs: [],
-    }
-
     // Simulate click on enter key
     $("#landmark-search").on("keyup", function (e) {
         let keyCode = e.which
@@ -14,12 +7,13 @@ $(document).ready(function () {
             $("#search").click()
         }
     })
-    // Sygic api url
-    let urlSygic = "https://api.sygictravelapi.com/1.0/en/places/list?query=";
 
     // Add event listener to search button
     $("#search").on("click", sygicAPI)
     $("#index-search").on("click", sygicAPI)
+
+    // Sygic api url
+    let urlSygic = "https://api.sygictravelapi.com/1.0/en/places/list?query=";
 
     // Call sygic api
     function sygicAPI() {
@@ -48,11 +42,9 @@ $(document).ready(function () {
 
                 // Push elements to DOM
                 for (var i = 0; i < places.length; i++) {
-                    // $.each(places, function () {
+                    urlPlaces = "https://api.sygictravelapi.com/1.0/en/places/" + places[i].id;
 
-                    // console.log(places[i].id);
-
-                    let urlPlaces = "https://api.sygictravelapi.com/1.0/en/places/" + places[i].id;
+                    // console.log('url places: ' + urlPlaces)
 
                     $.ajax({
                             url: urlPlaces,
@@ -140,37 +132,29 @@ $(document).ready(function () {
 
                             // // Clear search input
                             $("#landmark-search").val('')
-
-                            // included on click function that pushes sygic api call data into a global var
-                            $(".ui.inverted.button").on("click", function () {
-
-                                // these clear the array after clicks
-                                landObj.ids = [];
-                                landObj.lats = [];
-                                landObj.lngs = [];
-
-                                // these populate the object to use for yelp
-                                landObj.ids.push(results.data.place.id);
-                                landObj.lats.push(results.data.place.location.lat);
-                                landObj.lngs.push(results.data.place.location.lng);
-
-                                // console logs ids we wont need after yelp is working
-                                // console.log("lats array" + landObj.ids);
-
-                                yelpAPI();
-
-                                // Display modal on button click
-                                $(".ui.basic.modal").modal("show")
-                            });
                         })
                 }
+
+                // Landmark click event and call api
+                $(document).on("click", ".ui.inverted.button", function (index) {
+
+                    // Store lat & lng variables
+                    let lat = $(this).attr("lat")
+                    let lng = $(this).attr("lng")
+
+                    // Call yelp api function and pass lat & lng
+                    yelpAPI(lat, lng);
+
+                    // Display modal on button click
+                    $(".ui.basic.modal").modal("show")
+                });
             })
 
         // Yelp search event listener - correct version
-        function yelpAPI() {
+        function yelpAPI(lat, lng) {
 
             // Yelp API url
-            var urlYelp = "https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search?=" + "&latitude=" + landObj.lats + "&longitude=" + landObj.lngs + "&categories=restaurants&limit=5"
+            var urlYelp = "https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search?=" + "&latitude=" + lat + "&longitude=" + lng + "&categories=restaurants&limit=5"
 
             fetch(urlYelp, {
                     headers: {
@@ -179,7 +163,7 @@ $(document).ready(function () {
                 })
                 .then((res) => res.json())
                 .then((data) => {
-                    let places = data.businesses[0]
+                    let places = data.businesses
 
                     console.log(places)
 
@@ -208,7 +192,6 @@ $(document).ready(function () {
                                 `)
                         })
                     })
-
                 })
         }
     }
