@@ -80,24 +80,31 @@ $(document).ready(function () {
                         </div>
                         <div class="content">
                             <a class="header" id="${results.data.place.id}" src="${results.data.place.url}" target="_blank">${results.data.place.name}</a>
-                            <div class="meta">
+                          <div class="meta">
                             <h5>${results.data.place.name_suffix}</h5>
                             <span class="date">${perex}</span>
-                            </div>
+                          </div>
                         </div>
                         <div class="extra content">
+                          <div class="ui labeled button" tabindex="0">
+                            <div class="ui button" id="likeBtn">
+                              <i class="heart icon"></i> Like
+                            </div>
+                            <button class="ui teal button">Add to my calendar</button>
+                          </div>
+                          <br>
                             <i class="users icon"></i>
                             Category: ${results.data.place.level}
                         </div>
-                        `)
+              `)
 
-                        // Blur images on hover
-                        $(".special.cards .image").dimmer({
-                          on: "hover"
-                        });
+              // Blur images on hover
+              $(".special.cards .image").dimmer({
+                on: "hover"
+              });
 
-                        // // Clear search input
-                        // $("#landmark-search").val('')
+              // // Clear search input
+              // $("#landmark-search").val('')
 
 
               // included on click function that pushes sygic api call data into a global var
@@ -125,8 +132,10 @@ $(document).ready(function () {
 
       })
 
-
-
+    // change "like button" color ----- NOT WORKING RIGHT NOW?????????
+    $(".ui.button").click("#likeBtn", function() {
+      $(this).toggleClass("selected");
+    });
 
 
     // Yelp search event listener - correct version

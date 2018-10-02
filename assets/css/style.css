@@ -52,3 +52,11 @@ body    {
 .navbar-nav {
     display: inline-flex;
 }
+
+div#likeBtn:active {
+    background-color: teal;
+}
+
+.selected {
+    background: teal;
+}
