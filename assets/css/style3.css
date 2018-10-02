@@ -1,0 +1,14 @@
+/* login-page css */
+
+body {
+    width: 55%;
+    margin: auto;
+    margin-top: 7%;
+    margin-bottom: 7%;
+    display: block;
+}
+
+#logo {
+    margin: auto;
+    display: block;
+}

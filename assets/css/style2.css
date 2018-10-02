@@ -19,14 +19,18 @@ body {
     background-repeat: no-repeat;
 }
 
-#container {
-    width: 1000px;
-    margin: auto;
-
-    /* border: 2px solid gray; */
-
+.ui.inverted.button {
+    float: right;
+    clear: both;
+    margin-right: 30px;
     margin-top: 30px;
-    margin-bottom: 30px;
+}
+
+#container {
+    width: 80%;
+    margin: auto;
+    margin-top: 5%;
+    margin-bottom: 5%;
 
     justify-content: center;
 }
