@@ -1,14 +1,4 @@
-/* #bg-image {
-    background-image: url("../images/bg3.jpg");
-    height: 100%;
-    background-size: auto;
-    background-repeat: no-repeat;
-    filter: blur(8px);
-    -webkit-filter: blur(8px);
-    margin: -20px;
-    
-} */
-
+/* index page css */
 body {
     background-color: darkgray;
 
@@ -21,12 +11,13 @@ body {
 
 .ui.inverted.button {
     float: right;
-    clear: both;
-    margin-right: 30px;
+    margin-right: 5%;
     margin-top: 30px;
 }
 
 #container {
+    float: center;
+    clear: both;
     width: 80%;
     margin: auto;
     margin-top: 5%;
@@ -62,4 +53,12 @@ body {
     position: absolute;
     top: .35em;
     right: .5em;
+}
+
+.footer {
+    position: fixed;
+    bottom: 30px;
+    width: 100%;
+    text-align: center;
+    color: white;
 }

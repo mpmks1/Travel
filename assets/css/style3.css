@@ -12,3 +12,9 @@ body {
     margin: auto;
     display: block;
 }
+
+@media screen and (max-width: 768px) {
+    .ui.vertical.divider {
+        display: none;
+    }
+}
