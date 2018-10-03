@@ -86,7 +86,13 @@ $(document).ready(function () {
                             var perex = results.data.place.perex;
                             var img_url = results.data.place.main_media.media[0].url
 
-                            if (perex !== null || img_url !== null) {
+                            if (perex === null) {
+
+                              perex = " ";
+                            }
+                            else {
+                              perex = results.data.place.perex;
+                            }
 
                                 console.log(perex)
                                 console.log(JSON.stringify(img_url))
@@ -153,7 +159,7 @@ $(document).ready(function () {
                             </div>
                             </div>
                                 `)
-                            }
+                            
 
                             // Blur images on hover
                             $(".special.cards .image").dimmer({
@@ -186,7 +192,7 @@ $(document).ready(function () {
                 // console.log(places)
 
                 $(document).on("click", "#accordion-title", function (e) {
-
+                    console.log("click");
                     // Clear previous elements
                     $("#accordion-content").empty()
 
