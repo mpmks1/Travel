@@ -70,8 +70,8 @@ div#likeBtn:active {
     background-color: teal;
 }
 
-.selected {
-    background: teal;
+.ui.red.button {
+    background-color: teal;
 }
 
 .ui.modal {
