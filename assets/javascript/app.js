@@ -233,7 +233,6 @@ $(document).ready(function () {
                 $(document).on("click", ".dropdown.icon", function (e) {
 
                     $("#accordion-content").empty()
-
                     $.each(places, function (i, place) {
                         console.log(place.restaurant)
                         // Push elements to modal
