@@ -36,12 +36,12 @@ div#accordion-content > *  {
 }
 
 .footer {
-    position: fixed;
     width: 100%;
     text-align: center;
     padding-top: 20px;
     font-size: 12px;
     bottom: 10px;
+    margin-bottom:10px;
 }
 
 .ui.dividing.huge.header {
