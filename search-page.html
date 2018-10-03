@@ -2,12 +2,16 @@
 <html lang="en">
 
 <head>
+    <!-- link to firebase -->
     <script src="https://www.gstatic.com/firebasejs/5.5.2/firebase.js"></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!-- link to semantic ui -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.0/dist/semantic.min.css">
+    <!-- link to style sheet #1 -->
     <link rel="stylesheet" href="assets/css/style.css">
+    <!-- link to js -->
     <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
         crossorigin="anonymous"></script>
     <title>Travel Truant</title>
@@ -17,8 +21,7 @@
 
     <div class="wrapper">
 
-        <div class="ui basic modal"></div>
-
+        <div class="ui modal"></div>
         <div class="ui placeholder segment grey inverted">
             <div class="ui two column stackable center aligned grid">
                 <div class="middle aligned row">
@@ -39,23 +42,19 @@
                 </div>
             </div>
         </div>
-
+<!-- contains results of landmark search -->
         <div class="ui container segment">
-            <div class="ui dividing huge header">
+            <div class="ui dividing huge header" id="header-title">
                 Landmarks Near You
             </div>
-            <div class="ui centered stackable special cards" id="cards">
-
-            </div>
+            <div class="ui centered stackable special cards" id="cards"></div>
         </div>
-
-
     </div>
-
+<!-- footer -->
     <div class="footer">
         <p>Copyright © Truant Team</p>
     </div>
-
+<!-- script link to semantic ui and js sheet -->
     <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.0/dist/semantic.min.js"></script>
     <script src="assets/javascript/app.js"></script>
 
