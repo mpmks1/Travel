@@ -20,6 +20,7 @@ $(document).ready(function () {
 
     // Landmark click event and call api
     $(document).on("click", ".ui.inverted.button", function (index) {
+        event.preventDefault();
 
         // Prevent default action
         index.preventDefault()
@@ -190,6 +191,7 @@ $(document).ready(function () {
                 $(document).on("click", "#accordion-title", function (e) {
 
                     // Clear previous elements
+                    event.preventDefault();
                     $("#accordion-content").empty()
 
                     $.each(places, function (i, place) {
@@ -243,7 +245,7 @@ $(document).ready(function () {
                 // console.log(places)
 
                 $(document).on("click", ".dropdown.icon", function (e) {
-
+                        e.preventDefault();
                     $("#accordion-content").empty()
                     $.each(places, function (i, place) {
                         console.log(place.restaurant)
@@ -276,3 +278,40 @@ $(document).ready(function () {
             })
     }
 })
+
+
+//=========p5js background============
+var img;
+var angle = 0;
+var canvas;
+// function preload() {
+//  // preload() runs once
+
+// }
+
+function setup() {
+    // canvas.style("z-index", "-1");
+    createCanvas(windowWidth, windowHeight, WEBGL);
+//img = loadImage("world-map.gif")
+}
+
+function draw() {
+	camera(0, 0, (height /2) / tan(PI / 6), -200, 0, 0, 0 ,1 ,0);
+    background(0, 100, 200);
+  //textMode(NORMAL);
+//texture(img);
+	rectMode(CENTER);
+    rotateY(angle);
+    //camera(0,0,0)
+
+//translate(windowWidth-200,0, -200)
+    //texture(img)
+	sphere(width/3, 24,24)
+    //sphere(windowHeight/2, 24, 24);
+    angle += .001;
+}
+
+function windowResized() {
+  resizeCanvas(windowWidth, windowHeight);
+}
+
