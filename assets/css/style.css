@@ -1,3 +1,4 @@
+/* search-page css */
 body    {
     display: flex;
     flex-direction: column;
@@ -15,6 +16,7 @@ body    {
 
 .ui.container.segment   {
     display: none;
+    width: 100%;
 }
 
 #header-title   {
@@ -34,7 +36,44 @@ div#accordion-content > *  {
 }
 
 .footer {
+    position: fixed;
+    width: 100%;
     text-align: center;
     padding-top: 20px;
-    font-size: 1.2rem;
+    font-size: 12px;
+    bottom: 10px;
+}
+
+.ui.dividing.huge.header {
+    padding: 20px;
+}
+
+#logo {
+    width: 50px;
+    height: auto;
+    margin-right: 10px;
+}
+
+.ui.inverted.grey.segment {
+    background-color: white;
+}
+
+.navbar.navbar-expand-lg.navbar-light.bg-light {
+    display: block;
+}
+
+.navbar-nav {
+    display: inline-flex;
+}
+
+div#likeBtn:active {
+    background-color: teal;
+}
+
+.selected {
+    background: teal;
+}
+
+.ui.modal {
+    overflow-y: scroll;
 }

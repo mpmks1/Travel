@@ -35,6 +35,8 @@ $(document).ready(function () {
         $(".ui.modal").modal("show")
     });
 
+    
+
     // Call sygic api
     function sygicAPI() {
 
@@ -110,6 +112,13 @@ $(document).ready(function () {
                                     </div>
                                 </div>
                                 <div class="extra content">
+                                    <div class="ui labeled button" tabindex="0">
+                                    <div class="ui button" id="likeBtn">
+                                      <i class="heart icon"></i> Like
+                                    </div>
+                                    <button class="ui teal button">Add to my calendar</button>
+                                    </div>
+                                    <br>
                                     <i class="users icon"></i>
                                     Category: ${results.data.place.level}
                                 </div>
@@ -157,6 +166,7 @@ $(document).ready(function () {
                 }
             })
     }
+
 
     // Yelp search event listener - correct version
     function yelpAPI(lat, lng) {
@@ -210,6 +220,7 @@ $(document).ready(function () {
                 })
             })
     }
+
 
     // Call zomato api
     function zomatoAPI(lat, lng) {
