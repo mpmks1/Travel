@@ -16,8 +16,8 @@ body    {
 }
 
 .ui.placeholder.segment {
-    opacity: .8;
-    background-image: url('../images/bg1.jpg');
+    background-image: url('../images/bg3.jpg');
+    background-size: cover;
     margin-top: 0px;
 }
 
@@ -78,9 +78,9 @@ div#likeBtn:active {
     background-color: teal;
 }
 
-.ui.red.button {
+/* .ui.red.button {
     background-color: teal;
-}
+} */
 
 .ui.modal {
     overflow-y: scroll;

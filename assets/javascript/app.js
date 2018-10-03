@@ -18,6 +18,18 @@ $(document).ready(function () {
         $(".ui.accordion").accordion()
     })
 
+    // click likeBtn
+    $(document).on("click", "#likeBtn", function() {
+      console.log("Hello?");
+      console.log($(this).attr("class"));
+      if($(this).attr("class") === "ui button") {
+        $(this).attr("class","ui red button");
+      }
+      else if($(this).attr("class") === "ui red button") {
+        $(this).attr("class","ui button");
+      }
+    })
+
     // Landmark click event and call api
     $(document).on("click", ".ui.inverted.button", function (index) {
         event.preventDefault();
@@ -120,6 +132,16 @@ $(document).ready(function () {
                             var img_url = results.data.place.main_media.media[0].url
 
                             if (perex !== null && img_url !== null) {
+                              // if(perex === null) {
+                              //   perex = " ";
+                              // }
+                              // else {
+                              //   perex = results.data.place.perex;
+                              // }
+
+                              // if(img_url === null) {
+                              //   img_url = "https://carepharmaceuticals.com.au/wp-content/uploads/sites/19/2018/02/placeholder-600x400.png";
+                              // }
 
                                 // console.log(perex)
                                 // console.log(JSON.stringify(img_url))
@@ -280,38 +302,38 @@ $(document).ready(function () {
 })
 
 
-//=========p5js background============
-var img;
-var angle = 0;
-var canvas;
-// function preload() {
-//  // preload() runs once
+// //=========p5js background============
+// var img;
+// var angle = 0;
+// var canvas;
+// // function preload() {
+// //  // preload() runs once
 
+// // }
+
+// function setup() {
+//     // canvas.style("z-index", "-1");
+//     createCanvas(windowWidth, windowHeight, WEBGL);
+// //img = loadImage("world-map.gif")
 // }
 
-function setup() {
-    // canvas.style("z-index", "-1");
-    createCanvas(windowWidth, windowHeight, WEBGL);
-//img = loadImage("world-map.gif")
-}
+// function draw() {
+// 	camera(0, 0, (height /2) / tan(PI / 6), -200, 0, 0, 0 ,1 ,0);
+//     background(0, 100, 200);
+//   //textMode(NORMAL);
+// //texture(img);
+// 	rectMode(CENTER);
+//     rotateY(angle);
+//     //camera(0,0,0)
 
-function draw() {
-	camera(0, 0, (height /2) / tan(PI / 6), -200, 0, 0, 0 ,1 ,0);
-    background(0, 100, 200);
-  //textMode(NORMAL);
-//texture(img);
-	rectMode(CENTER);
-    rotateY(angle);
-    //camera(0,0,0)
+// //translate(windowWidth-200,0, -200)
+//     //texture(img)
+// 	sphere(width/3, 24,24)
+//     //sphere(windowHeight/2, 24, 24);
+//     angle += .001;
+// }
 
-//translate(windowWidth-200,0, -200)
-    //texture(img)
-	sphere(width/3, 24,24)
-    //sphere(windowHeight/2, 24, 24);
-    angle += .001;
-}
-
-function windowResized() {
-  resizeCanvas(windowWidth, windowHeight);
-}
+// function windowResized() {
+//   resizeCanvas(windowWidth, windowHeight);
+// }
 
