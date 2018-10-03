@@ -73,3 +73,7 @@ div#likeBtn:active {
 .selected {
     background: teal;
 }
+
+.ui.modal {
+    overflow-y: scroll;
+}
