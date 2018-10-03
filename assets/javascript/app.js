@@ -133,8 +133,9 @@ $(document).ready(function () {
       })
 
     // change "like button" color ----- NOT WORKING RIGHT NOW?????????
-    $(".ui.button").click("#likeBtn", function() {
+    $(document).click(".ui.button", function() {
       $(this).toggleClass("selected");
+      console.log("hello?");
     });
 
 
