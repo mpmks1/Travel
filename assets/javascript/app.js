@@ -84,6 +84,18 @@ $(document).ready(function () {
         let landmark = $("#landmark-search").val().trim()
         console.log(`User search: ${landmark}`)
 
+                //=========firebase===============
+                database.ref().push({
+                    landmarkLocation: landmark,
+                })
+                    // stores typed search inputs
+                database.ref().on("value", function(snapshot) {
+                    console.log(landmark + " firebase landmark");
+                }, function(errorObject) {
+                    console.log("firebase error! failed to read: " + errorObject.code);
+                })
+                //=========firebase===============
+
         // Make request to Sygic
         $.ajax({
                 url: urlSygic + landmark,
@@ -188,6 +200,21 @@ $(document).ready(function () {
                 // console.log("*****Yelp Results Below*****")
                 // console.log(places)
 
+                
+                //========firebase coordinates===========
+                database.ref().push({
+                    latitude: lat,
+                    longitude: lng
+                })
+
+                database.ref().on("value", function(xysnapshot) {
+                    console.log(lat + lng + " firebase coordinates");
+                }, function(errorObject) {
+                    console.log("firebase coordinates error, failed to read :" + errorObject.code);
+                })
+                //========firebase coordinates===========
+
+
                 $(document).on("click", "#accordion-title", function (e) {
 
                     // Clear previous elements
@@ -284,34 +311,40 @@ $(document).ready(function () {
 var img;
 var angle = 0;
 var canvas;
-// function preload() {
-//  // preload() runs once
-
-// }
+function preload() {
+    img = loadImage("assets/images/1_earth_8k.jpg")
+}
 
 function setup() {
-    // canvas.style("z-index", "-1");
     createCanvas(windowWidth, windowHeight, WEBGL);
-//img = loadImage("world-map.gif")
 }
 
 function draw() {
-	camera(0, 0, (height /2) / tan(PI / 6), -200, 0, 0, 0 ,1 ,0);
+	camera(0, 500, (height /2) / tan(PI / 6), -200, 0, 0, 0 ,1 ,0);
     background(0, 100, 200);
-  //textMode(NORMAL);
-//texture(img);
 	rectMode(CENTER);
     rotateY(angle);
-    //camera(0,0,0)
-
-//translate(windowWidth-200,0, -200)
-    //texture(img)
+    texture(img);
 	sphere(width/3, 24,24)
-    //sphere(windowHeight/2, 24, 24);
     angle += .001;
 }
 
 function windowResized() {
   resizeCanvas(windowWidth, windowHeight);
 }
+//=========== end p5js background==========
 
+//==============firebase============
+
+var config = {
+    apiKey: "AIzaSyAa6e_lXOL1nONWCwftcJW0NmsdPs4uK3w",
+    authDomain: "travel-truant.firebaseapp.com",
+    databaseURL: "https://travel-truant.firebaseio.com/",
+    projectId: "travel-truant",
+    storageBucket: "",
+    messagingSenderId: "525665077026"
+  };
+  firebase.initializeApp(config);
+   var database = firebase.database();
+
+   //=============firebase================
