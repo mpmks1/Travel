@@ -310,6 +310,7 @@ $(document).ready(function () {
 //=========p5js background============
 var img;
 var angle = 0;
+var xangle =0;
 var canvas;
 function preload() {
     img = loadImage("assets/images/1_earth_8k.jpg")
@@ -320,12 +321,14 @@ function setup() {
 }
 
 function draw() {
-	camera(0, 500, (height /2) / tan(PI / 6), -200, 0, 0, 0 ,1 ,0);
+	camera(0, 200, (height /2) / tan(PI / 6), -200, 0, 0, 0 ,1 ,0);
     background(0, 100, 200);
 	rectMode(CENTER);
     rotateY(angle);
+    rotateX(xangle);
     texture(img);
-	sphere(width/3, 24,24)
+    sphere(width/3, 24,24)
+    xangle += .0002
     angle += .001;
 }
 
