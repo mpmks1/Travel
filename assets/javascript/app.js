@@ -308,7 +308,6 @@ $(document).ready(function () {
 var img;
 var angle = 0;
 var canvas;
-var globe;
 
 
 function preload() {
