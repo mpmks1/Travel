@@ -100,7 +100,7 @@ $(document).ready(function () {
     $.ajax({
       url: urlSygic + landmark,
       headers: {
-        "x-api-key": "elOVQ84rsF7fwxTyQ2uwM64xAfBGcbJf8rbCGmgw"
+        "x-api-key": "7mnXz8lqvC30y2JaAdGylI5dX6DrsUe42rssb4ja"
       },
     })
       .then(function (landmarks) {
@@ -118,7 +118,7 @@ $(document).ready(function () {
           $.ajax({
             url: urlPlaces,
             headers: {
-              "x-api-key": "elOVQ84rsF7fwxTyQ2uwM64xAfBGcbJf8rbCGmgw"
+              "x-api-key": "7mnXz8lqvC30y2JaAdGylI5dX6DrsUe42rssb4ja"
           }
         })
           .then(function (results) {
@@ -248,123 +248,6 @@ $(document).ready(function () {
             $(".ui.modal").modal("show");
         });
 
-          // Call sygic api
-          function sygicAPI() {
-
-            // Sygic api url
-            let urlSygic = "https://api.sygictravelapi.com/1.0/en/places/list?query=";
-
-            // Clear card content
-            $("#cards").empty();
-
-            // Show cards content on search
-            $(".ui.container.segment").show()
-
-            // Value of search input
-            let landmark = $("#landmark-search").val().trim()
-            console.log(`User search: ${landmark}`)
-
-            //=========firebase===============
-            database.ref().push({
-              landmarkLocation: landmark,
-            })
-            // stores typed search inputs
-            database.ref().on("value", function (snapshot) {
-              console.log(landmark + " firebase landmark");
-            }, function (errorObject) {
-              console.log("firebase error! failed to read: " + errorObject.code);
-            })
-            //=========firebase===============
-
-            // Make request to Sygic
-            $.ajax({
-              url: urlSygic + landmark,
-              headers: {
-                "x-api-key": "elOVQ84rsF7fwxTyQ2uwM64xAfBGcbJf8rbCGmgw"
-              },
-            })
-              .then(function (landmarks) {
-
-                // Store places object in variable
-                let places = landmarks.data.places;
-
-                // Push elements to DOM
-                for (var i = 0; i < places.length; i++) {
-
-                  urlPlaces = "https://api.sygictravelapi.com/1.0/en/places/" + places[i].id;
-
-                  // console.log('url places: ' + urlPlaces)
-
-                  $.ajax({
-                    url: urlPlaces,
-                    headers: {
-                      "x-api-key": "elOVQ84rsF7fwxTyQ2uwM64xAfBGcbJf8rbCGmgw"
-                  }
-                  })
-                  .then(function (results) {
-                      // console.log(results.data.place.main_media.media[0].url);
-                      // console.log(results.data.place.id);
-                      // console.log(results.data.place.perex);
-
-                      console.log(results.data.place.name)
-
-                      var perex = results.data.place.perex;
-                      var img_url = results.data.place.main_media.media[0].url
-
-                      if (perex !== null && img_url !== null) {
-
-                        // console.log(perex)
-                        // console.log(JSON.stringify(img_url))
-
-                        // Push to responsive div
-                        $("#cards").append(`
-                            <div class="card">
-                                <div class="blurring dimmable image">
-                                    <div class="ui dimmer">
-                                    <div class="content">
-                                        <div class="center">
-                                        <div class="ui inverted button" id="${results.data.place.id}" lat="${results.data.place.location.lat}" lng="${results.data.place.location.lng}" name="${results.data.place.name}" image="${results.data.place.main_media.media[0].url}" name_suffix="${results.data.place.name_suffix}" desc="${perex}">View Landmark</div>
-                                        </div>
-                                    </div>
-                                    </div>
-                                    <img src="${results.data.place.main_media.media[0].url}">
-                                </div>
-                                <div class="content">
-                                    <a class="header" id="${results.data.place.id}" src="${results.data.place.url}" target="_blank">${results.data.place.name}</a>
-                                    <div class="meta">
-                                    <h5>${results.data.place.name_suffix}</h5>
-                                    <span class="date">${perex}</span>
-                                    </div>
-                                </div>
-                                <div class="extra content">
-                                    <div class="ui labeled button" tabindex="0">
-                                    <div class="ui button" id="likeBtn">
-                                      <i class="heart icon"></i> Like
-                                    </div>
-                                    <button class="ui teal button">Add to my calendar</button>
-                                    </div>
-                                    <br>
-                                    <i class="users icon"></i>
-                                    Category: ${results.data.place.level}
-                                </div>
-                            </div>
-                            `)
-                      }
-
-                      // Blur images on hover
-                      $(".special.cards .image").dimmer({
-                        on: "hover"
-                      });
-
-                      // // Clear search input
-                      $("#landmark-search").val('');
-                  })
-                }
-              })
-          }
-
-          // image error function
-
       })
 
         fetch(urlYelp, {
@@ -430,15 +313,6 @@ $(document).ready(function () {
           })
   }
 
-// //=========p5js background============
-// var img;
-// var angle = 0;
-// var canvas;
-// // function preload() {
-// //  // preload() runs once
-
-// // }
-
 //=========p5js background============
 var img;
 var angle = 0;
@@ -453,8 +327,8 @@ function setup() {
 }
 
 function draw() {
-  camera(0, 200, (height / 2) / tan(PI / 6), -200, 0, 0, 0, 1, 0);
-  background(0, 100, 200);
+  camera(0, 350, (height / 2) / tan(PI / 6), 0, 0, 0, 0, 1, 0);
+  background(0, 0, 0);
   rectMode(CENTER);
   rotateY(angle);
   rotateX(xangle);
