@@ -16,15 +16,15 @@ body    {
 }
 
 .ui.placeholder.segment {
-    opacity: 0.8;
-    background-image: url('../images/bg3.jpg');
-    background-size: cover;
+    opacity: .8;
+    background-image: url('../images/bg1.jpg');
     margin-top: 0px;
 }
 
 .ui.container.segment   {
-    opacity: .8;
+    opacity: .9;
     display: none;
+  
 }
 
 #header-title   {
@@ -78,9 +78,9 @@ div#likeBtn:active {
     background-color: teal;
 }
 
-/* .ui.red.button {
-    background-color: teal;
-} */
+.selected {
+    background: teal;
+}
 
 .ui.modal {
     overflow-y: scroll;
